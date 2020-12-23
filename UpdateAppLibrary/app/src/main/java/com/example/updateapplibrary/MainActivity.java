@@ -3,6 +3,10 @@ package com.example.updateapplibrary;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+
+import com.example.library.AppUtils;
+import com.example.library.UpdateChecker;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -10,5 +14,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        UpdateChecker.checkForDialog(MainActivity.this,"");
+
+        String mensaje = "Información de la versión actual: versionName = " +
+                AppUtils.getVersionName(this) +
+                "\nversionCode = " +
+                AppUtils.getVersionCode(this);
+        Log.i("TAGS", mensaje);
+
     }
 }

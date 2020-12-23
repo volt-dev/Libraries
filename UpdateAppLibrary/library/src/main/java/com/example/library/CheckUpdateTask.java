@@ -22,7 +22,7 @@ class CheckUpdateTask extends AsyncTask<Void, Void, Void> {
     private boolean mShowProgressDialog;
     private String JSONurl;
     private String apkUrl;
-    private int apkCode = 0;
+    private int apkCode;
 //    private static final String url = com.example.library.Constants.UPDATE_URL;
 
     CheckUpdateTask(Context context, int type, boolean showProgressDialog, String JSONurl) {
@@ -78,6 +78,24 @@ class CheckUpdateTask extends AsyncTask<Void, Void, Void> {
                 }
                 Log.i("TAGS", "url: " + apkUrl);
                 Log.i("TAGS", "versionCode: " + apkCode);
+
+                String updateMessage = "";
+                Log.i("APPD", "apkCode: " + apkCode);
+
+                // Se extrae el código de versión de la app actual.
+                int versionCode = AppUtils.getVersionCode(mContext);
+                Log.i("APPD", "versioncode: " + versionCode);
+
+                // Se comparan y se toma una decisión con respecto al resultado.
+                if (apkCode > versionCode) {
+                    if (mType == Constants.TYPE_NOTIFICATION) {
+                        new NotificationHelper(mContext).showNotification(updateMessage, apkUrl);
+                    } else if (mType == Constants.TYPE_DIALOG) {
+                        showDialog(mContext, updateMessage, apkUrl);
+                    }
+                } else if (mShowProgressDialog) {
+                    Toast.makeText(mContext, mContext.getString(R.string.android_auto_update_toast_no_new_update), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -85,24 +103,6 @@ class CheckUpdateTask extends AsyncTask<Void, Void, Void> {
 
             }
         });
-
-        String updateMessage = "";
-        Log.i("APPD", "apkCode: " + apkCode);
-
-        // Se extrae el código de versión de la app actual.
-        int versionCode = AppUtils.getVersionCode(mContext);
-        Log.i("APPD", "versioncode: " + versionCode);
-
-        // Se comparan y se toma una decisión con respecto al resultado.
-        if (apkCode > versionCode) {
-            if (mType == Constants.TYPE_NOTIFICATION) {
-                new NotificationHelper(mContext).showNotification(updateMessage, apkUrl);
-            } else if (mType == Constants.TYPE_DIALOG) {
-                showDialog(mContext, updateMessage, apkUrl);
-            }
-        } else if (mShowProgressDialog) {
-            Toast.makeText(mContext, mContext.getString(R.string.android_auto_update_toast_no_new_update), Toast.LENGTH_SHORT).show();
-        }
     }
 
 
