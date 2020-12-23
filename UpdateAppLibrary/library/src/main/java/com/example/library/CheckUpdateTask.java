@@ -16,13 +16,15 @@ class CheckUpdateTask extends AsyncTask<Void, Void, String> {
     private Context mContext;
     private int mType;
     private boolean mShowProgressDialog;
-    private static final String url = com.example.library.Constants.UPDATE_URL;
+    private String JSONurl;
+//    private static final String url = com.example.library.Constants.UPDATE_URL;
 
-    CheckUpdateTask(Context context, int type, boolean showProgressDialog) {
+    CheckUpdateTask(Context context, int type, boolean showProgressDialog, String JSONurl) {
 
         this.mContext = context;
         this.mType = type;
         this.mShowProgressDialog = showProgressDialog;
+        this.JSONurl = JSONurl;
 
     }
 
@@ -93,6 +95,6 @@ class CheckUpdateTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... args) {
-        return com.example.library.HttpUtils.get(url);
+        return com.example.library.HttpUtils.get(JSONurl);
     }
 }
