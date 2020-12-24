@@ -8,7 +8,7 @@ import android.content.Intent;
 
 class UpdateDialog {
 
-    static void show(final Context context, String content, final String downloadUrl) {
+    static void show(final Context context, String content, final String downloadUrl, final Class<? extends Activity> ActivityToOpen) {
         if (isContextValid(context)) {
             new AlertDialog.Builder(context)
                     .setTitle(R.string.android_auto_update_dialog_title)
@@ -16,6 +16,7 @@ class UpdateDialog {
                     .setPositiveButton(R.string.android_auto_update_dialog_btn_download, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             goToDownload(context, downloadUrl);
+                            context.startActivity(new Intent(context, ActivityToOpen));
                         }
                     })
                     .setNegativeButton(R.string.android_auto_update_dialog_btn_cancel, new DialogInterface.OnClickListener() {

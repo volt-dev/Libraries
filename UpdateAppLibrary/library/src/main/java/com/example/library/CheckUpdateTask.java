@@ -1,5 +1,6 @@
 package com.example.library;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -23,15 +24,16 @@ class CheckUpdateTask extends AsyncTask<Void, Void, Void> {
     private String JSONurl;
     private String apkUrl;
     private int apkCode;
+    private Class<? extends Activity> ActivityToOpen;
 //    private static final String url = com.example.library.Constants.UPDATE_URL;
 
-    CheckUpdateTask(Context context, int type, boolean showProgressDialog, String JSONurl) {
+    CheckUpdateTask(Context context, int type, boolean showProgressDialog, String JSONurl, final Class<? extends Activity> ActivityToOpen) {
 
         this.mContext = context;
         this.mType = type;
         this.mShowProgressDialog = showProgressDialog;
         this.JSONurl = JSONurl;
-
+        this.ActivityToOpen = ActivityToOpen;
     }
 
 
@@ -91,7 +93,7 @@ class CheckUpdateTask extends AsyncTask<Void, Void, Void> {
                     if (mType == Constants.TYPE_NOTIFICATION) {
                         new NotificationHelper(mContext).showNotification(updateMessage, apkUrl);
                     } else if (mType == Constants.TYPE_DIALOG) {
-                        showDialog(mContext, updateMessage, apkUrl);
+                        showDialog(mContext, updateMessage, apkUrl, ActivityToOpen);
                     }
                 } else if (mShowProgressDialog) {
                     Toast.makeText(mContext, mContext.getString(R.string.android_auto_update_toast_no_new_update), Toast.LENGTH_SHORT).show();
@@ -109,8 +111,8 @@ class CheckUpdateTask extends AsyncTask<Void, Void, Void> {
     /**
      * Show dialog
      */
-    private void showDialog(Context context, String content, String apkUrl) {
-        UpdateDialog.show(context, content, apkUrl);
+    private void showDialog(Context context, String content, String apkUrl, final Class<? extends Activity> ActivityToOpen) {
+        UpdateDialog.show(context, content, apkUrl, ActivityToOpen);
     }
 
 
