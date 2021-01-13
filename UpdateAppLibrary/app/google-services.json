@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "39440910053",
+    "firebase_url": "https://car-lite-c5859-default-rtdb.firebaseio.com",
+    "project_id": "car-lite-c5859",
+    "storage_bucket": "car-lite-c5859.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39440910053:android:bdf18c16dc86d21ab0f60c",
+        "android_client_info": {
+          "package_name": "com.example.updateapplibrary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39440910053-i9ifmnmfo5212h067sl9dagdv0ckkc7j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB78K7i__bKGAMxFklIGeNt9z0Ct4QqyTA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39440910053-i9ifmnmfo5212h067sl9dagdv0ckkc7j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
