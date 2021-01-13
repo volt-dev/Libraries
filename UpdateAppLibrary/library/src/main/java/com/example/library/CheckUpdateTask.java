@@ -112,7 +112,7 @@ class CheckUpdateTask extends AsyncTask<Void, Void, Void> {
      * Show dialog
      */
     private void showDialog(Context context, String content, String apkUrl, final Class<? extends Activity> ActivityToOpen) {
-        UpdateDialog.show(context, content, apkUrl, ActivityToOpen);
+//        UpdateDialog.show(context, content, apkUrl, ActivityToOpen);
     }
 
 

@@ -68,8 +68,10 @@ public class DownloadService extends IntentService {
 
             // Solo con permiso root.
             // SilentInstall.install(apkFile.getPath());
-            com.example.library.ApkUtils.installAPk(this, apkFile);
 
+            UpdateDialog.lockScreen(false);
+            Log.d("ASPAS", "fin descarga.");
+            com.example.library.ApkUtils.installAPk(this, apkFile);
             notificationHelper.cancel();
 
         } catch (Exception e) {
