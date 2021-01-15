@@ -60,8 +60,6 @@ public class UpdateChecker {
                 // Se comparan y se toma una decisión con respecto al resultado.
                 if (apkCode > versionCode) {
                     showDialog(context, updateMessage, apkUrl, view, activity, prg_circular, textView, deshabilitado);
-                } else {
-                    Toast.makeText(context, context.getString(R.string.android_auto_update_toast_no_new_update), Toast.LENGTH_SHORT).show();
                 }
             }
 
