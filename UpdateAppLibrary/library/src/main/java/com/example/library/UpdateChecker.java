@@ -2,9 +2,9 @@ package com.example.library;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 public class UpdateChecker {
 
     private static String apkUrl;
-    private static int apkCode;
+    private static int versionCode;
 
     public static void checkForDialog(Context context, Activity activity, View view, int prg_circular, int textView, int deshabilitado) {
         if (context != null) {
@@ -40,25 +40,28 @@ public class UpdateChecker {
                     switch (snapshot1.getKey()) {
                         case "url":
                             apkUrl = (String) snapshot1.getValue();
+                            Log.i("TAGS", "url: " + apkUrl);
                             break;
                         case "versionCode":
                             String aux = "" + snapshot1.getValue();
-                            apkCode = Integer.parseInt(aux);
+                            if (!TextUtils.isEmpty(aux)) {
+                                versionCode = Integer.parseInt(aux);
+                            } else {
+                                versionCode = 0;
+                            }
+                            Log.i("TAGS", "versionCode: " + versionCode);
                             break;
                     }
                 }
-                Log.i("TAGS", "url: " + apkUrl);
-                Log.i("TAGS", "versionCode: " + apkCode);
 
                 String updateMessage = "";
-                Log.i("APPD", "apkCode: " + apkCode);
 
                 // Se extrae el código de versión de la app actual.
-                int versionCode = com.example.library.AppUtils.getVersionCode(context);
-                Log.i("APPD", "versioncode: " + versionCode);
-
+                int versionCodeOld = com.example.library.AppUtils.getVersionCode(context);
+                Log.i("TAGS", "versioncodeOld: " + versionCodeOld);
+                Log.i("TAGS", "versionCode > versionCodeOld: " + (versionCode > versionCodeOld));
                 // Se comparan y se toma una decisión con respecto al resultado.
-                if (apkCode > versionCode) {
+                if (versionCode > versionCodeOld && !TextUtils.isEmpty(apkUrl)) {
                     showDialog(context, updateMessage, apkUrl, view, activity, prg_circular, textView, deshabilitado);
                 }
             }

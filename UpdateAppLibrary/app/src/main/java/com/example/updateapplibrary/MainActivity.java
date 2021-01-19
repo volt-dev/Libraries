@@ -14,7 +14,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        UpdateChecker.checkForDialog(MainActivity.this,"", MainActivity2.class);
+//        UpdateChecker.checkForDialog(MainActivity.this, this,
+//                findViewById(R.id.main_l).getRootView(), 0, 0, 0);
 //        String mensaje = "Información de la versión actual: versionName = " +
 //                AppUtils.getVersionName(this) +
 //                "\nversionCode = " +
